@@ -1,0 +1,36 @@
+<script>
+  var blog_id=JSON.stringify({{id}});
+</script>
+<div class="col-md-4">
+      <div class = "edit-blog">
+      <h2>
+      Update Post
+      </h2>
+  <form class="edit-blog-form">
+    <label for="blog-title">
+      Title:
+    </label>
+    <br>
+    <textarea id="blog-title" name="blog-title" rows="3" cols="80">
+      {{title}}
+    </textarea>
+    <br>
+    <br>
+    <label for="blog-desc">
+      Description:
+    </label>
+     <br>
+    <textarea id="blog-desc" name="blog-desc" rows="10" cols="80">
+      {{description}}
+    </textarea>
+    <br>
+    <br>
+    <input id="blog-edit-id" type="hidden" value={{id}}/>
+    <button type="submit">
+      Submit
+    </button>
+  </form>
+  </div>
+</div>
+
+<script src="/js/edit.js"></script>

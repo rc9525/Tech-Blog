@@ -1,0 +1,59 @@
+<script>
+  var blog_id=JSON.stringify({{id}});
+</script>
+<script>
+  var user_id=JSON.stringify({{id}});
+</script>
+
+<div class ="blog-card">
+  <div class="blog-card-header">
+    <h4 class="card-title">
+       {{title}}
+    </h4>
+  </div>
+  <div class="card-body">
+      <h6>Created by {{user.name}}
+      on {{format_date date_created}}
+    </h6>
+    <p> 
+      {{description}}
+    </p>
+  </div> 
+</div>
+  <br>
+  <br>
+  <h5>Comments</h5>
+  {{#each comments as |comment|}}
+      <h6>{{format_date comment.date_created}}</h6>
+      <span class="iconify" data-icon="bxs:user-pin"></span>
+      <h6>Anonymous{{comment.user.name}}</h6>
+      <p>{{comment.description}}</p>  
+  {{/each}}
+  <br>
+<div>
+  <h4>
+    Add Comment:
+  </h4>
+    <form class="form new-comment-form">
+      <div class="form-group">
+          <textarea class="form-input" id="comment-desc" name="comment-desc"></textarea>
+      </div>
+      <div class="form-group">
+        {{#if logged_in}}
+        <button type="submit" class="btn btn-primary">Submit</button>
+         {{else}}
+          <button class="btn btn-primary">
+            <a href="/login">
+            Submit
+            </a>
+            </button>
+        {{/if}}
+      </div>      
+    </form>
+</div>
+<br>
+<br>
+<br>
+
+<script src="/js/blog.js"></script>
+<script src="https://code.iconify.design/2/2.2.0/iconify.min.js"></script>
