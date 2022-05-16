@@ -1,0 +1,52 @@
+body{
+    background-color: rgb(240, 247, 255);
+    position:relative;
+    min-height: 100vh;
+    font-family: "Lato";
+}
+nav{
+    background-color: blue;
+    height: 100px;
+}
+.nav-link, .navbar-brand {
+    color:white;
+    font-weight: 700;
+}
+.nav-link:hover, .navbar-brand:hover {
+    color:red;
+}
+.content{
+    max-width: 90%;
+    margin:auto;
+    padding: 30px;
+}
+
+.login-container {
+    width: 60%;
+    margin: auto;
+    margin-top: 100px;
+}
+.punch{
+    font-weight: 900;
+    background-color: red;
+    color: white;
+    border:none;
+    border-radius: 5px;
+    padding: 8px 16px;
+}
+.punch:hover{
+    background-color: rgb(238, 113, 113);
+}
+footer{
+    position: sticky;
+    top: 100vh;
+    /* bottom: 0; */
+    background-color: blue;
+
+}
+
+footer h3{
+    color:white;
+    padding: 30px;
+    text-align: center;
+}
