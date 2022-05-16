@@ -5,50 +5,38 @@ const moment = require('moment');
 const session = require('express-session');
 const routes = require('./controllers');
 const sequelize = require('./config/connections');
+require("dotenv").config();
 
 const checkAuth = require('./utils/auth.js')
+const { use } = require('./controllers');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(express.static('public'));
-app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+const sess = {
+  secret: process.env.SECRET,
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  }),
+  expires: new Date(Date.now()+ (30 * 86400 * 1000))
+};
+
+app.use(session(sess));
 
 
-// These are the ones that make handlebars work with express
-const hbs = exphbs.create();
-app.engine("handlebars", hbs.engine);
-app.set("view engine", "handlebars")
-app.use(routes)
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
-// app.get('/', checkAuth, (req, res) => {
-// app.get('/', (req, res) => {
-//     res.render("homepage")
-// })
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// app.get('/login', (req, res) => {
-//     res.render("login")
-// })
-
-// app.get('/clock', (req, res) => {
-//     res.render("clock")
-// })
-
-// app.get('/profile', (req, res) => {
-//     res.render("profile")
-// })
-
-// app.get('/clockout', (req, res) => {
-//     var clockInTime = moment("2022-03-17"); //get the saved clockin from the database
-//     var clockOutTime = moment(); // get the current time
-//     var totalTime = clockOutTime.diff(clockInTime, 'minutes')
-//     res.json({
-//         message: "Total time is " + totalTime + " minutes"
-//     });
-// })
+app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log('Now listening'));
-  });
- 
+  app.listen(PORT, () => console.log('Now listening'));
+});

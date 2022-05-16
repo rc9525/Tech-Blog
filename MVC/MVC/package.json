@@ -5,7 +5,8 @@
     "main": "employeeManager.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "seed": "node seeds/seed.js"
+        "seed": "node seeds/seed.js",
+        "start": "node server.js"
     },
     "dependencies": {
         "console.table": "^0.10.0",
